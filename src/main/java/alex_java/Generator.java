@@ -2,15 +2,13 @@ package alex_java;
 
 import java.lang.reflect.Field;
 import java.lang.management.ManagementFactory;
-import java.lang.management.RuntimeMXBean;
-
-import static java.lang.Math.pow;
+import java.lang.Math;
 
 public class Generator {
     private static long jvmStartTime = ManagementFactory.getRuntimeMXBean().getStartTime();
-    private static long m = (long) Math.pow(2, 31);
-    private static long a = 214013;
-    private static long c = 2531011;
+    private static final long m = (long) Math.pow(2, 31);
+    private static final long a = 214013;
+    private static final long c = 2531011;
 
     public static long Generate_long() {
         long rand = (a * jvmStartTime + c) % m;
@@ -49,14 +47,12 @@ public class Generator {
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }
-
-
             }
             else if (x.getType().equals(boolean.class))
-            { int generatedValue=(int)Generate_long() % 2;
+            { int generatedValue=(int)(Generate_long() % 2);
                 boolean boolValue;
                 try {
-                    if ( generatedValue>= 1) {
+                    if ( generatedValue== 1) {
                         boolValue = true;
                     }
                     else {
@@ -68,7 +64,52 @@ public class Generator {
                     throw new RuntimeException(e);
                 }
             }
-            //x.set(init_obj, (String) "new value");
+            else if (x.getType().equals(double.class))
+            {
+                int point= (int)(Generate_long() %18);
+                long value= Generate_long();
+                double result=value*Math.pow(0.1,point);
+                try {
+                    x.set(init_obj, result);
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            else if (x.getType().equals(float.class))
+            {
+                int point= (int)(Generate_long() %9);
+                int value= (int)Generate_long();
+                float result=(float)(value*Math.pow(0.1,point));
+                try {
+                    x.set(init_obj, result);
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+            else if (x.getType().equals(short.class)) {
+                try {
+                    x.set(init_obj, (short) (Generate_long() % Short.MAX_VALUE));
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            else if (x.getType().equals(byte.class)) {
+                try {
+                    x.set(init_obj, (byte) (Generate_long() % Byte.MAX_VALUE));
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            else if (x.getType().equals(char.class)) {
+                try {
+                    x.set(init_obj, (char) (Generate_long() % 65535));
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+                //x.set(init_obj, (String) "new value");
+            }
+
         }
 
 
