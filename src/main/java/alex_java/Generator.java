@@ -53,9 +53,17 @@ public class Generator {
 
             }
             else if (x.getType().equals(boolean.class))
-            {
+            { int generatedValue=(int)Generate_long() % 2;
+                boolean boolValue;
                 try {
-                    x.set(init_obj, (int) (Generate_long() % Integer.MAX_VALUE));
+                    if ( generatedValue>= 1) {
+                        boolValue = true;
+                    }
+                    else {
+                        boolValue = false;
+                    }
+                    x.set(init_obj, (boolValue));
+
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }
