@@ -16,11 +16,11 @@ public class Main {
         Test test = new Test();
         Generate(test);
         Class<?> cl = test.getClass();
-        Field[] Decfields = cl.getDeclaredFields();
-        for (Field x : Decfields) {
-            x.setAccessible(true);
+        Field[] decFields = cl.getDeclaredFields();
+        for (Field field : decFields) {
+            field.setAccessible(true);
             try {
-                System.out.println((x.get(test)));
+                System.out.println((field.get(test)));
             } catch (IllegalAccessException e) {
                 throw new RuntimeException(e);
             }

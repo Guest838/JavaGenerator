@@ -3,14 +3,14 @@ package alex_java;
 
 public class Test
 {
-   private String s;
-   private int i;
-   private char ch;
-   private double db;
-   private float fl;
-   private short sh;
-   private byte bt;
-   private long lg;
+   private String testStr;
+   private int testInt;
+   private char testChar;
+   private double testDouble;
+   private float testFloat;
+   private short testShort;
+   private byte testByte;
+   private long testLong;
 
 
 }
